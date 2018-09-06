@@ -7,9 +7,23 @@ public class Exposer {
 
 	private long seckillId;
 
+	private long now;
+
 	private long start;
 
 	private long end;
+
+	@Override
+	public String toString() {
+		return "Exposer{" +
+				"exposed=" +exposed+
+				",md5='" + md5 + '\''+
+				",seckillId=" +seckillId +
+				",now=" +now +
+				",start="+start+
+				",end="+end+
+				 "}";
+	}
 
 
 }
