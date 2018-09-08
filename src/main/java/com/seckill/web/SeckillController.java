@@ -1,7 +1,7 @@
 package com.seckill.web;
 
+import com.seckill.entity.Seckill;
 import com.seckill.service.SeckillService;
-
 import java.sql.Date;
 
 import org.slf4j.*;
@@ -85,7 +85,7 @@ public class SeckillController {
 			@CookieValue(value = "killPhone",required = false) Long phone){
 
 		if(phone == null ) {
-			return new SeckillResult<SeckillExecution>(false,"未注册");
+			return new SeckillResult<SeckillExecution>(false,"鏈敞鍐�");
 			
 		}
 
