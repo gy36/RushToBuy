@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import com.seckill.dao.SeckillDao;
@@ -18,12 +21,15 @@ import com.seckill.exception.SeckillException;
 import com.seckill.service.SeckillService;
 import org.slf4j.Logger;
 
+@Service
 public class SeckillServiceImpl implements SeckillService{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	@Autowired
 	private SeckillDao seckillDao;
 
+	@Autowired
 	private SuccessKilledDao successKilledDao;
 
 	private final String slat = "asdhkfaksd";
@@ -79,10 +85,11 @@ public class SeckillServiceImpl implements SeckillService{
 	}
 
 	@Override
+	@Transactional
 	public SeckillExecution executeSeckillProcedure(Long seckillId, Long userPhone, String md5)
 			throws SeckillException, RepeatKillException, SeckillCloseException {
 		// TODO Auto-generated method stub
-		if(md5 == null || md5.equals(getMD5(seckillId))) {
+		if(md5 == null || !md5.equals(getMD5(seckillId))) {
 			throw new SeckillException("seckill data rewrite!");
 		}
 		//执行抢购逻辑：减库存 +记录购买行为
@@ -99,9 +106,9 @@ public class SeckillServiceImpl implements SeckillService{
 				if(insertCount <= 0) {
 					throw new RepeatKillException("seckill repeated");
 				}else {
-					SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId);
+					SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId,userPhone);
 
-					return new SeckillExecution(seckillId,1,"秒少成功",successKilled);
+					return new SeckillExecution(seckillId,1,"秒杀成功",successKilled);
 
 				}
 			}
@@ -112,8 +119,6 @@ public class SeckillServiceImpl implements SeckillService{
 		}catch(Exception e){
 			logger.error(e.getMessage(),e);
 			throw new SeckillException("seckill inner error"+ e.getMessage());
-
-			
 		}
 
 	}

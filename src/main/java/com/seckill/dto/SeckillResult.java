@@ -19,7 +19,6 @@ public class SeckillResult <T>{
 	public SeckillResult(boolean success,T data) {
 		this.success = success;
 		this.data =data ;
-
 	}
 
 	public boolean isSuccess() {
