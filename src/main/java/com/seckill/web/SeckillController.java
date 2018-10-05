@@ -3,6 +3,7 @@ package com.seckill.web;
 import com.seckill.entity.Seckill;
 import com.seckill.service.SeckillService;
 import java.sql.Date;
+import java.util.List;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
