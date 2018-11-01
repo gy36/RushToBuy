@@ -22,7 +22,7 @@ public interface SeckillService {
      *
      * @return
      */
-    List<Seckill> getSeckillList();
+   List<Seckill> getSeckillList();
 
 
     /**
