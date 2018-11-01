@@ -3,10 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>秒杀商品列表</title>
+    <title>秒杀商品列表😁</title>
     <%@include file="common/header.jsp" %>
 </head>
 <body>
+<nav class="navbar navbar-default" role="navigation"> 
+    <div class="container-fluid"> 
+        <div class="navbar-header"> 
+            <a class="navbar-brand" href="#">一点商城</a> 
+        </div> 
+        <ul class="nav navbar-nav navbar-right"> 
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li> 
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
+        </ul> 
+    </div> 
+</nav>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
