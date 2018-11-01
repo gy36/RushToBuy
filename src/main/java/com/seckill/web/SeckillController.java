@@ -93,7 +93,7 @@ public class SeckillController {
 			@CookieValue(value = "userPhone",required = false) Long phone){
 
 		if(phone == null ) {
-			return new SeckillResult<SeckillExecution>(false,"手机号为空");
+			return new SeckillResult<SeckillExecution>(false,"鎵嬫満鍙蜂负绌�");
 			
 		}
 
