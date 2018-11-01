@@ -97,5 +97,4 @@ public class Exposer {
 		return "Exposer [exposed=" + exposed + ", md5=" + md5 + ", seckillId=" + seckillId + ", now=" + now + ", start="
 				+ start + ", end=" + end + "]";
 	}
-
 }
