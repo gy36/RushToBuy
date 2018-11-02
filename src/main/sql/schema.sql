@@ -43,6 +43,15 @@ key idx_create_time(create_time)
 )engine= innodb  default charset = utf8 comment="√Î…±ø‚¥Ê±Ì";
 
 
+CREATE TABLE `user` (
+  `id` bigint(20) unsigned NOT NULL,
+  `user_account` char(20) DEFAULT NULL,
+  `user_pwd` char(32) DEFAULT NULL,
+  `gmt_modified` datetime DEFAULT NULL,
+  `gmt_create` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_account` (`user_account`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 
 
