@@ -1,21 +1,30 @@
 package com.seckill.entity;
 
 public class User {
-	private String UserAccount;
-	private String UserPwd;
+	private long Id;
+	private String userAccount;
+	private String userPwd;
 	private String gmtModified;
 	private String gmtCreate;
+
 	public String getUserAccount() {
-		return UserAccount;
+		return userAccount;
 	}
 	public void setUserAccount(String userAccount) {
-		UserAccount = userAccount;
+		this.userAccount = userAccount;
 	}
+	public long getId() {
+		return Id;
+	}
+	public void setId(long Id) {
+		this.Id = Id;
+	}
+
 	public String getPwd() {
-		return UserPwd;
+		return userPwd;
 	}
 	public void setPwd(String pwd) {
-		UserPwd = pwd;
+		userPwd = pwd;
 	}
 	public String getGmtModified() {
 		return gmtModified;
@@ -29,6 +38,10 @@ public class User {
 	public void setGmtCreate(String gmtCreate) {
 		this.gmtCreate = gmtCreate;
 	}
+	@Override
+	public String toString() {
+		return "User [Id=" + Id + ", userAccount=" + userAccount + ", userPwd=" + userPwd + ", gmtModified="
+				+ gmtModified + ", gmtCreate=" + gmtCreate + "]";
+	}
 
-		
 }

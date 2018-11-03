@@ -6,8 +6,29 @@
 
     <!--mapper作用:为DAO接口方法提供sql语句配置-->
 
-    <!-- int reduceNumber(long seckillId, Date killTime);-->
+    <!-- int loginUserByAccount(long seckillId, Date killTime);-->
     <select id="loginUserByAccount"  resultType="User">
     	select user_account,user_pwd from user where user_account = #{user_accout}; 
     </select>
+
+	<insert id="registerNewUser"  keyProperty="id">
+		insert into user(user_account,user_pwd,gmt_modified,gmt_create) 
+			values(
+				#{user_phone},
+				#{user_pwd},
+				#{gmt_modified},
+				#{gmt_create}
+				)
+    </insert>
+
+	<insert id="registerNewUserV2" parameterType="User"    useGeneratedKeys="true" keyProperty="id">
+	  insert into user(user_account,user_pwd,gmt_modified,gmt_create) 
+			values(
+				#{userAccount,jdbcType=CHAR},
+				#{userPwd,jdbcType=CHAR},
+				#{gmtModified,jdbcType=TIMESTAMP},
+				#{gmtCreate,jdbcType=TIMESTAMP}
+				)
+	</insert>
+
 </mapper>
