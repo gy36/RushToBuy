@@ -28,6 +28,23 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
+	public boolean canLogin(long phone,String pwd) {
+		User user = this.getUserByAccount(phone);
+
+		//不存在用户
+		if(user == null) {
+			return false;
+		}
+
+		//密码错误
+		if( !pwd.equals(user.getPwd())) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
 	public long registerNewUser(long user_phone,String user_pwd) 
 			throws PhoneExistException,RegisterException{
 

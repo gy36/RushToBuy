@@ -41,16 +41,6 @@ public class LoginController {
 		return "login";
 	}
 
-@RequestMapping(value = "/login",method=RequestMethod.POST)
-	public SeckillResult toLogin() {
-
-		//登陆账号
-		return new SeckillResult(true,"账号错误");
-
-	}
-
-
-	@RequestMapping("/sign")
 	public String SignPage() {
 
         //HttpSession session = request.getSession();
@@ -121,7 +111,7 @@ public class LoginController {
 
 	}
 
-	@RequestMapping("/login_v2")
+	@RequestMapping(value = "/login",method=RequestMethod.POST)
 	@ResponseBody
 	public SeckillResult LoginV2(HttpServletRequest request) {
 		
@@ -141,44 +131,43 @@ public class LoginController {
 		/***start 空值判断***/
 		 if(strPhone == null || strPhone.length() == 0) {
 			 
-			 return new SeckillResult(true,"手机号缺失");
+			 return new SeckillResult(false,"手机号缺失");
 		 }
 
 		 if(pwd == null || pwd.length() == 0) {
 			 
-			 return new SeckillResult(true,"缺少密码");
+			 return new SeckillResult(false,"缺少密码");
 		 }
 
 		/***end 空值判断***/
 
-		/***逻辑值判断***/
-		 if(pwd.equals(rePwd)) {
-			 return new SeckillResult(true,"两次密码不同");
-		 }
-
-		 Pattern p = Pattern.compile("^((13[0-9])|(15[^4])|(18[0-9])|(17[0-9])|(147))\\d{8}$");
-		 Matcher m = p.matcher(strPhone);
-		 if(!m.matches()) {
-			 return new SeckillResult(true,"手机号不对");
-		 }
-
-		/***逻辑值判断结束***/
-
+	
 		/***数据库判断***/
 		 phone = Long.parseLong(strPhone);
 		 
 		//是否注册过
 		 user = userService.getUserByAccount(phone);
-		 if(user != null) {
-			 return new SeckillResult(true,"登陆");
+		 if(user == null) {
+			 
+			 return new SeckillResult(false,"不存在账号");
 		 }
 
-		return new SeckillResult(true,"失败");
+		 boolean s = userService.canLogin(phone,pwd);
+
+		 if(s == false) {
+			 return new SeckillResult(false,"密码错误");
+		 }
+
+		 //保存session
+		 HttpSession session = request.getSession();
+		 session.setAttribute("user", user);
+
+		return new SeckillResult(true,"成功");
 
 	}
 
 
-	@RequestMapping("/sign_v1")
+	@RequestMapping(value="/sign_v1",method=RequestMethod.POST)
 	@ResponseBody
 	public SeckillResult Signv1(HttpServletRequest request) {
 		
@@ -222,30 +211,30 @@ public class LoginController {
 		/***start 空值判断***/
 		 if(strPhone == null || strPhone.length() == 0) {
 			 
-			 return new SeckillResult(true,"手机号缺失");
+			 return new SeckillResult(false,"手机号缺失");
 		 }
 
 		 if(pwd == null || pwd.length() == 0) {
 			 
-			 return new SeckillResult(true,"缺少密码");
+			 return new SeckillResult(false,"缺少密码");
 		 }
 
 		 if(pwd == null || pwd.length() == 0) {
 			 
-			 return new SeckillResult(true,"缺少再次密码");
+			 return new SeckillResult(false,"缺少再次密码");
 		 }
 
 		/***end 空值判断***/
 
 		/***逻辑值判断***/
 		 if(pwd.equals(rePwd)) {
-			 return new SeckillResult(true,"两次密码不同");
+			 return new SeckillResult(false,"两次密码不同");
 		 }
 
 		 Pattern p = Pattern.compile("^((13[0-9])|(15[^4])|(18[0-9])|(17[0-9])|(147))\\d{8}$");
 		 Matcher m = p.matcher(strPhone);
 		 if(!m.matches()) {
-			 return new SeckillResult(true,"手机号不对");
+			 return new SeckillResult(false,"非法手机号");
 		 }
 
 		/***逻辑值判断结束***/
@@ -256,22 +245,22 @@ public class LoginController {
 		//是否注册过
 		 user = userService.getUserByAccount(phone);
 		 if(user != null) {
-			 return new SeckillResult(true,"已经注册过");
+			 return new SeckillResult(false,"已经注册过");
 		 }
 
 		//注册
 		 try {
 			 	res = userService.registerNewUser(phone, pwd);
 			 	if(res <=0 ) {
-			 		return new SeckillResult(true,"注册失败");
+			 		return new SeckillResult(false,"注册失败");
 			 	}
 			 
 		 }catch(PhoneExistException e1) {
-			 	return new SeckillResult(true,"重复");
+			 	return new SeckillResult(false,"重复");
 		 }catch(RegisterException e2) {
-			 	return new SeckillResult(true,"注册失败");
+			 	return new SeckillResult(false,"注册失败");
 		 }catch(Exception e3) {
-			 	return new SeckillResult(true,"注册失败");
+			 	return new SeckillResult(false,"注册失败");
 		 }
 
 		return new SeckillResult(true,"成功");

@@ -10,6 +10,8 @@ public interface UserService {
 
 	 User getUserByAccount(long phone);
 
+	 boolean canLogin(long phone,String pwd);
+
 	 long registerNewUser(long user_phone,String user_pwd) 
 			 throws PhoneExistException,RegisterException;
 
