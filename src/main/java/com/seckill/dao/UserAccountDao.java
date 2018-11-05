@@ -6,6 +6,6 @@ import com.seckill.entity.User;
 
 public interface UserAccountDao {
 	
-	User loginUserByAccount(@Param("user_accout") long seckillId);
+	User loginUserByAccount(@Param("user_accout") long user_accout);
 
 }
