@@ -15,7 +15,7 @@
                     <form:form action="/login" method="post" role="form">
                         <div class="input-group input-group-md">
                             <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="userid" name="userid" placeholder="请输入用户ID"/>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号"/>
                         </div>
                         <br>
                         <div class="input-group input-group-md">
@@ -25,12 +25,14 @@
                         <br>
                         <div class="input-group input-group-md">
                             <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="请再次输入密码"/>
+                            <input type="password" class="form-control" id="re_password" name="re_password" placeholder="请再次输入密码"/>
                         </div>
                         <br/>
                         
                         <a href="login">登陆</a>
-                        <button style="float:right;" type="button" class="btn btn-success">注册</button>
+                        <button style="float:right;" type="button"  id="register" class="btn btn-success"   delay="300" data-container="body"
+            data-toggle="popover" data-placement="right"
+            data-content="注册成功">注册</button>
                     </form:form>
                 </div>
             </div>
@@ -40,5 +42,14 @@
  
         <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
         <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="/resources/script/register.js" type="text/javascript"></script>
+
+		<script type="text/javascript">
+			$(function () {
+				//使用EL表达式传入参数
+				register.sbumit.init();
+			})
+		</script>
+
     </body>
 </html>

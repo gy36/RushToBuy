@@ -11,7 +11,6 @@ public interface SeckillDao {
 
 
 	/**
-	 * ¼õ¿â´æ
 	 * @param seckillId
 	 * @param killTime
 	 * @return

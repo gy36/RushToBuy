@@ -145,5 +145,4 @@ var seckill = {
             seckill.handlerSeckill(seckillId, seckillBox);
         }
     }
-
 }

@@ -38,7 +38,9 @@
 		<property name="typeAliasesPackage" value="com.seckill.entity" />
 		<!-- 扫描sql配置文件:mapper需要的xml文件 -->
 			<property name="mapperLocations" value="classpath:mapper/*.xml" />
-
+		<property name="transactionFactory">
+    <bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />
+  </property>
 	</bean>
 
 	<!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到soring容器中 -->
@@ -48,6 +50,7 @@
 		<!-- 给出需要扫描Dao接口包 -->
 		<property name="basePackage" value="com.seckill.dao" />
 	</bean>
+
 
 	
 </beans>

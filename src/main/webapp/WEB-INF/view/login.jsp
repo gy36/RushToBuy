@@ -15,7 +15,7 @@
                     <form:form action="/login" method="post" role="form">
                         <div class="input-group input-group-md">
                             <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="userid" name="userid" placeholder="手机号"/>
+                            <input type="text" class="form-control" id="userid" name="phone" placeholder="手机号"/>
                         </div>
                         <br>
                         <div class="input-group input-group-md">
@@ -25,7 +25,9 @@
                         <br>
 
                         <a href="sign">点击注册</a>
-                        <button style="float:right;" type="button" class="btn btn-success">登陆</button>
+                        <button style="float:right;" type="button"  id="login" class="btn btn-success"  delay="300" data-container="body"
+            data-toggle="popover" data-placement="right"
+            data-content="登陆成功">登陆</button>
                     </form:form>
                 </div>
             </div>
@@ -35,5 +37,14 @@
  
         <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
         <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="/resources/script/login.js" type="text/javascript"></script>
+
+		<script type="text/javascript">
+			$(function () {
+				//使用EL表达式传入参数
+				login.sbumit.init();
+			})
+		</script>
+
     </body>
 </html>
